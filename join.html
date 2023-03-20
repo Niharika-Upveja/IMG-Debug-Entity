@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+body{
+    background-image: url(light.jpg);
+    background-size: 100%;
+}
+#st{
+    text-align: center;
+    font-size: 100px;
+    color: antiquewhite;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+#btn{
+   
+    font-size: 50px;
+    color:black;
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  padding: 30px 30px;
+  border-radius: 50px;
+ background-color:blanchedalmond;
+
+}
+.txt{
+    font-size: 30px;
+   color:black;
+   margin: 0;
+  position: absolute;
+ padding: 10px 10px;
+ border-radius: 50px;
+background-color:blanchedalmond;
+width: 230px;
+top: 70%;
+ 
+
+}
+#search{
+   
+  left: 40%;
+ -ms-transform: translate(-50%, -50%);
+ transform: translate(-50%, -20%); 
+
+}
+#searchBtn{
+
+ top: 70%;
+ left: 60%;
+ -ms-transform: translate(-50%, -50%);
+ transform: translate(-50%, -20%); 
+
+
+}
+form{
+  /* top: 70%;
+ left: 40%;
+ -ms-transform: translate(-50%, -50%);
+ transform: translate(-50%, -20%);  */
+ border: 30px;
+
+ margin-left: 800px;
+ margin-top: 300px;
+ border-radius: 30px;
+    padding: 40px;
+    
+}
+#enter{
+  border-radius: 30px;
+ padding: 20px;
+ left: 50%;
+ 
+}
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <p id="st">JOIN THE GAME</p>
+  <button id="btn" onclick="myFunction()">Enter the code</button>
+  <!-- <textarea  id="btn1"> </textarea>  -->
+  <textarea name="search" class="txt" id="search"></textarea>
+<!-- <a id="searchBtn" class="txt" >Enter</a> -->
+<form   method="POST" action="/join">
+   <input type="submit" class="txt" id="enter" value="ENTER"> 
+</form>
+  <!-- <p id="btn1">Copy Code</p>
+</div>  <div id="h1-container"></div> -->
+
+</div>
+<script type="text/javascript" src="app.js"></script>
+
+
+</body>
+</html>

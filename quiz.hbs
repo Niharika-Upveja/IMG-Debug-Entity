@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    {{!-- <link rel="stylesheet" href="style.css"> --}}
+    <title>Document</title>
+    <style>
+body{
+    margin:0;
+    font-size: 16px;
+ background-image:url("https://images4.alphacoders.com/107/thumb-1920-1072240.jpg");
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline:none;
+}
+
+
+.custom-box {
+    max-width: 700px;
+    background-color: rgba(0, 0, 0, 0.397);
+    color: #cccccc;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 10px;
+    animation: fadeInRight 1s ease;
+
+}
+@keyframes fadeInRight{
+    0%{
+        transform: translateX(40px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0px);
+        opacity: 1 ;
+
+    }
+    
+}
+.custom-box.hide{
+    display: none;
+}
+.custom-box::before,
+.custom-box::after{
+    content: '';
+    clear: both;
+    display: table;
+}
+.home-box h3{
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 15px;
+    line-height: 25px;
+}
+.home-box p{
+    font-size: 16px;
+    color:black;
+    font-weight: 400;
+    margin-bottom: 10px;
+    line-height: 22px;
+}
+
+.home-box p span{
+    font-size: 16px;
+    color: black;
+    font-weight: 500;
+    margin-bottom: 10px;
+    line-height: 22px;
+}
+.btn{
+    padding: 15px 45px;
+    background-color: #009688;
+    color:white;
+    border:none;
+    border-radius:5px;
+    font-family: 'Montserrat',sans-serif;
+    font-size:16px;
+    cursor:pointer;
+    display: inline-block;
+}
+.quiz-box .question-number{
+font-size: 18px;
+color: #009688;
+font-weight: 600;
+border-bottom: 1px solid #cccccc;
+padding-bottom: 10px;
+line-height: 25px;
+}
+
+.quiz-box .question-text{
+    font-size: 22px;
+    color: white;
+    line-height: 28px;
+    font-weight: 400;
+    padding: 20px 0;
+    margin:0;
+}
+
+.quiz-box .option-container .option{
+    background-color: #cccccc;
+    padding: 15px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+    opacity: 0 ;
+    animation: fadeIn 0.3s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+.quiz-box .option-container .option.correct::before{
+    content:'';
+    position: absolute;
+    left:0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: green;
+    z-index: -1;
+    animation: slideInLeft .5s ease forwards;
+
+}
+.quiz-box .option-container .option.wrong::before{
+    content:'';
+    position: absolute;
+    left:0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    z-index: -1;
+    animation: slideInLeft .5s ease forwards;
+
+}
+@keyframes slideInLeft {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+transform:translateX(-0%);
+    }
+    
+}
+.quiz-box .option-container .option.correct{
+    color: white;
+
+}
+.quiz-box .option-container .option.wrong{
+    color: white;
+
+}
+@keyframes fadeIn{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    } 
+}
+.quiz-box .answers-indicator{
+width: 100%;
+float: left;
+}
+
+.quiz-box .btn{
+    margin:15px 0;
+
+
+}
+
+.quiz-box .answers-indicator div{
+    height: 40px;
+    width: 40px;
+    display:inline-block;
+    background-color: #cccccc;
+    border-radius: 50%;
+}
+.quiz-box .answers-indicator div.correct{
+  background-color: green;
+  background-image: url("https://cdn.pixabay.com/photo/2016/03/31/14/37/check-mark-1292787__340.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+.quiz-box .answers-indicator div.wrong{
+    background-color: red;
+    background-image: url("https://w7.pngwing.com/pngs/611/44/png-transparent-x-cross-wrong-sign-thumbnail.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+.result-box{
+    text-align: center;
+}
+.result-box .hide{
+    display: none;
+}
+.result-box h1{
+    font-size: 36px;
+    line-height: 42px;
+    color: #009688;
+}
+.result-box table{
+width: 100%;
+border-collapse:collapse;
+margin: 30px 0;
+}
+.result-box table td{
+border:1px solid #cccccc;
+padding: 8px 15px;
+font-weight: 500;
+color:white;
+font-weight: bold;
+width: 50%;
+text-align: left; 
+font-size: 18px;
+}
+.result-box .btn{
+margin-right: 20px;
+}
+@media(max-width: 767px ){
+    .result-box.btn{
+     margin-bottom: 15px;   
+    }
+}
+.quiz-box .option-container .option.already-answered{
+    pointer-events: none;
+} 
+</style>
+</head>
+
+<body>
+    
+    <div class="home-box custom-box">
+        <h3>Instructions:</h3>
+        <b>Total number of questions : <span class="total-question"></span></b>
+        <button type="button" class="btn" onclick="startQuiz()">START</button>
+    </div>
+    <div class="quiz-box custom-box hide">
+        <div class="question-number"></div>
+        <div class="question-text">
+        </div>
+        <div class="option-container">
+        </div>
+        <div class="next-question-btn">
+            <button type="button" class="btn" onclick="next()">NEXT</button>
+            </div>
+        <div class="answers-indicator">
+        </div>
+        </div>
+        
+        <div class="result-box custom-box hide">
+            <h1>Quiz result</h1>
+            <table>
+                <tr>
+                    <td>Total Questions</td>
+                    <td><span class="total-question"></span></td>
+                </tr>
+                <tr>
+                    <td>Attempt</td>
+                    <td><span class="total-attempt"></span></td>
+                </tr>
+                <tr>
+                    <td>Correct</td>
+                    <td><span class="total-correct"></span></td>
+                </tr>
+                <tr>
+                    <td>Wrong</td>
+                    <td><span class="total-wrong"></span></td>
+                </tr>
+                <tr>
+                    <td>Percentage</td>
+                    <td><span class="percentage"></span></td>
+                </tr>
+                <tr>
+                    <td>Total Score</td>
+                    <td><span class="total-score"></span></td>
+                </tr>
+            </table>
+            
+        </div>
+    </div>
+    <script>
+       
+    
+        const quiz=[
+        {
+            q:'Why did Katappa killed Baahubali',
+           
+            options:['Because Sivagami wanted Katappa kill to Baahubali','Because he himself wanted Katappa kill to Baahubali','Because Bijjaladeva Deva wanted Katappa kill to Baahubali','Because Bhallala Deva wanted Katappa kill to Baahubali'],
+            answer:0
+        },
+    
+        {
+            q:'What was the name of the lady who raised Mahendra Baahubali? ',
+            options:['Sivagami','Sangra','Madurai'],
+            answer:1
+        },
+         {
+            q:'How long did Devasena stay as a captive at Bhalladeva kingdom?',
+            options:['28','22','30','25'],
+            answer:3,
+            img:'https://media.proprofs.com/images/QM/user_images/2503852/New%20Project%20(33)(328).jpg' 
+         },   
+         {
+            q:'Who was the leader of the rebel group that aimed at releasing Devasena from Bhallaldeva prison?',
+            options:['Avantika','Devasena- brother','Sivagami',],
+            answer:1,
+        },
+         {
+            q:'Complete this dialogues from the film, “ Aurat par haath daalne vale ki ungliyaan nahi kaat tey, Kaat tey hai toh____.”',
+            options:['Sir','Haath','Gala','Gardan'],
+            answer:3,
+            img:'https://img.mensxp.com/media/content/2017/May/how-well-do-you-know-baahubali-650x420-5-1495018827.jpg?w=469&h=364&cc=1' 
+        },
+    
+           
+        {
+            q:"Baahubali entered Guinness Book of World Records for?",
+            options:['Highest Budget','Biggest poster','Most Expensive VFX in India'],
+            answer:1,
+            img:'https://img.mensxp.com/media/content/2017/May/how-well-do-you-know-baahubali-650x420-4-1495018148.jpg?w=469&h=364&cc=1',
+        },
+       {
+        q:" Name the sword that Sheikh Alam Khan tries to sell Kattappa",
+            options:['Shamsher','Sikander','Tsurugi'],
+            answer:1,
+            img:'https://img.mensxp.com/media/content/2017/May/how-well-do-you-know-baahubali-650x420-6-1495018901.jpg?w=469&h=364&cc=1',
+       },
+       {
+        q:"What is the name of the virtual reality film based on the Baahubali franchise",
+            options:['Mahishmati before Baahubali','Sword Baahubali','Origin of Baahubali'],
+            answer:1,
+            img:'https://img.mensxp.com/media/content/2017/May/how-well-do-you-know-baahubali-650x420-6-1495018901.jpg?w=469&h=364&cc=1',
+       }
+        ]
+    
+       
+       
+    
+    const questionNumber=document.querySelector(".question-number");
+    const questionText=document.querySelector(".question-text");
+    const optionContainer=document.querySelector(".option-container");
+    const answersIndicatorContainer=document.querySelector(".answers-indicator");
+    const homeBox=document.querySelector(".home-box");
+    const quizBox=document.querySelector(".quiz-box");
+    const resultBox=document.querySelector(".result-box");
+    const questionLimit=5;
+    let questionCounter=0
+    let currentQuestion;
+    let availableQuestions=[];
+    let availableOptions=[];
+    let correctAnswers=0;
+    let attempt=0;
+    
+    
+    function setavailableQuestions(){
+        const totalQuestion =questionLimit;
+        for(let i=0;i<totalQuestion;i++){
+            availableQuestions.push(quiz[i])
+    
+        }
+        
+    }
+    
+    
+    function getNewQuestion()
+    {
+        questionNumber.innerHTML="Question"+(questionCounter+1)+"of"+questionLimit;
+        const questionIndex=availableQuestions[Math.floor(Math.random()*availableQuestions.length)];
+        currentQuestion=questionIndex;
+        questionText.innerHTML=currentQuestion.q;
+        const index1=availableQuestions.indexOf(questionIndex);
+       console.log(index1);
+        availableQuestions.splice(index1,1);
+        if(currentQuestion.hasOwnProperty("img")){
+            const img=document.createElement("img");
+            img.src=currentQuestion.img;
+            questionText.appendChild(img);
+        }
+      
+        const optionLen=currentQuestion.options.length;
+
+        questionCounter++
+
+        for(let i=0;i<optionLen;i++)
+        {
+            availableOptions.push(i);
+        }
+        optionContainer.innerHTML='';
+
+        let animationDelay =0.2;
+    
+        for(let i=0;i<optionLen;i++)
+        {
+            const optonIndex=availableOptions[Math.floor(Math.random()*availableOptions.length)];
+            const index2=availableOptions.indexOf(optonIndex);
+            availableOptions.splice(index2,1);
+    
+            const option=document.createElement("div");
+            option.innerHTML=currentQuestion.options[optonIndex];
+            option.id=optonIndex;
+            option.style.animationDelay=animationDelay+'s';
+            animationDelay=animationDelay+0.15;
+            option.className="option";
+            optionContainer.appendChild(option)
+
+            option.setAttribute("onclick","getResult(this)");
+        }
+       
+    }
+    window.onload = function(){
+        setavailableQuestions();
+        getNewQuestion();
+        answersIndicator();
+    }
+    
+    function getResult(element){
+        const id=parseInt(element.id);
+        if(id===currentQuestion.answer){
+           element.classList.add("correct");
+           updateAnswerIndicator("correct");
+           correctAnswers++;
+        }
+        else{
+            element.classList.add("wrong");
+            updateAnswerIndicator("wrong");
+
+            const optionLen=optionContainer.children.length;
+            for(let i=0;i<optionLen;i++)
+            {
+                if(parseInt(optionContainer.children[i].id)===currentQuestion.answer)
+                {
+                    optionContainer.children[i].classList.add("correct")
+                }
+            }
+        }
+
+
+        attempt++;
+        unclickableOptions();
+         
+    }
+    function unclickableOptions()
+    {
+const optionLen=optionContainer.children.length;
+for(let i=0;i<optionLen;i++)
+{
+    optionContainer.children[i].classList.add("already-answered");
+}
+    }
+
+    function answersIndicator()
+    {
+        answersIndicatorContainer.innerHTML='';
+        const totalQuestion=questionLimit;
+        for(let i=0;i<totalQuestion;i++)
+        {
+            const indicator=document.createElement("div");
+            answersIndicatorContainer.appendChild(indicator);
+        }
+    }
+   function  updateAnswerIndicator(markType){
+    answersIndicatorContainer.children[questionCounter-1].classList.add(markType)
+
+   }
+
+    function next(){
+        if(questionCounter==questionLimit)
+        {
+            console.log("quiz over");
+            quizOver();
+        }
+    
+        else{
+    
+            getNewQuestion();
+        }
+    }
+
+    function quizOver()
+    {
+quizBox.classList.add("hide");
+resultBox.classList.remove("hide");
+quizResult();
+    }
+
+    function quizResult()
+    {
+       resultBox.querySelector(".total-question").innerHTML=questionLimit
+        resultBox.querySelector(".total-attempt").innerHTML=attempt;
+        resultBox.querySelector(".total-correct").innerHTML=correctAnswers;
+        resultBox.querySelector(".total-wrong").innerHTML=attempt- correctAnswers;
+        const percentage=(correctAnswers/questionLimit)*100;
+      resultBox.querySelector(".percentage").innerHTML=percentage.toFixed(2)+"%";
+        resultBox.querySelector(".total-score").innerHTML=correctAnswers+"/"+questionLimit;
+    }
+    {{!-- function tryAgainQuiz(){
+        resultBox.classList.add("hide");
+        quizBox.classList.remove("hide");
+        resetQuiz();
+        startQuiz();
+    }
+    function goToHome(){
+        resultBox.classList.add("hide");
+        homeBox.classList.remove("hide");
+        resetQuiz();
+    } --}}
+
+    function startQuiz()
+    {
+        homeBox.classList.add("hide");
+        quizBox.classList.remove("hide");
+        setavailableQuestions();
+        getNewQuestion();
+        answersIndicator();
+
+    }    
+    window.onload=function(){
+        homeBox.querySelector(".total-question").innerHTML=questionLimit
+    }
+
+    function resetQuiz(){
+    let questionCounter=0;
+    let correctAnswers=0;
+    let attempt=0;
+    startQuiz();
+    }
+    </script>
+    <script type="js/app.js"></script> 
+   
+</body>
+</html>
