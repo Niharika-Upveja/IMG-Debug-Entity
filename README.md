@@ -6,8 +6,6 @@ Team Members:
 
 Niharika Upveja
 
-
 Pranjal Vanjale
-
 
 Shambhavi Deo
